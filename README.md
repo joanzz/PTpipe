@@ -7,7 +7,7 @@ PenetranceCards, a global, community-contributed public archive of variant penet
 
 
 <div align="center">
-  <img src="images/PTpipe-pipeline.svg" alt="PTpipe Graph">
+  <img src="image/PTpipe-pipeline.svg" alt="PTpipe Graph">
 </div>
 
 ## General Settings
@@ -92,4 +92,4 @@ python PTpipe_run.py --input /path/to/PTpipe/data/Test/02_qc2.vcf.gz --output /p
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
