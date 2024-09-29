@@ -1,0 +1,24 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 64
+Rules claiming more threads will be scaled down.
+Job stats:
+job          count
+---------  -------
+all              1
+final_cal        1
+total            2
+
+Select jobs to execute...
+
+[Tue Aug  6 14:50:16 2024]
+rule final_cal:
+    input: data/05_carriers.hwe, data/05_carriers.bim
+    output: /data/result/aaa.txt
+    log: logs/final_cal.log
+    jobid: 1
+    reason: Missing output files: /data/result/aaa.txt
+    threads: 6
+    resources: tmpdir=/tmp
+

@@ -1,0 +1,4 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+NameError in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/Snakefile, line 14:
+name 'Fals' is not defined
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/Snakefile", line 14, in <module>

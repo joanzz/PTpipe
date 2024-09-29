@@ -1,0 +1,38 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job          count
+---------  -------
+all              1
+final_cal        1
+total            2
+
+Select jobs to execute...
+
+[Tue Jul 23 14:28:50 2024]
+rule final_cal:
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.hwe, /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.bim
+    output: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    log: logs/final_cal.log
+    jobid: 1
+    reason: Missing output files: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 14:28:50 2024]
+Error in rule final_cal:
+    jobid: 1
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.hwe, /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.bim
+    output: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    log: logs/final_cal.log (check log file(s) for error details)
+
+RuleException:
+NameError in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/VCNum.smk, line 22:
+The name 'log' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/VCNum.smk", line 22, in __rule_final_cal
+  File "/gpfs/hpc/home/lijc/zhuzp/miniconda3/envs/PTseeker/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-23T142849.953355.snakemake.log

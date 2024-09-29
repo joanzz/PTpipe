@@ -1,0 +1,89 @@
+home: /gpfs/lijc/zhuzhp/PTpipe
+####################### 以下参数可以在命令行中配置和修改 ######################
+#### 命令分成三大类：snakemake、base、tools
+##   1、base: PTpipe 自身的参数（比如基本的输入、输出设置，线程数设置等）
+##   2、snakemake：snakemake 的参数
+##   3、tools：snakemake 里的 rule 使用到的工具的参数
+
+base:
+  #基本输入输出路径和参数信息
+  input: 
+    arg_name: --input
+    type: str
+    value: ${home}/data/Example/Example.vcf.gz
+    help: "Path to the input vcf file."
+
+  output: 
+    arg_name: --output
+    type: str
+    value: ${home}/data/result/Example_cohort_carriers.txt
+    help: "Path to the variant carriers file."
+
+  baseqc:
+    arg_name: --base_qc
+    action: 'store_true'
+    value: False
+    help: "Whether the VCF file needs to be quality controlled."
+
+  sample_sel:
+    arg_name: --sample_filtering
+    action: 'store_true'
+    value: False
+    help: "Whether sample screening is required.If required, use --samplelist to specify the path to the sample list."
+
+  threads:
+    arg_name: --threads
+    type: int
+    value: 6
+    help: "Number of threads for pipeline."
+
+  samplelist:
+    arg_name: --samplelist
+    type: str
+    value: ${home}/data/Example/Example_sample_list.txt
+    help: "Path to the sample list."
+
+
+############################## base END ################################
+
+########################################################################
+## snakemake：snakemake 的参数                                         ##
+## - 补充说明：snakemake 的参数可在命令行当中自行添加扩展，不局限于以下参数 ##
+########################################################################
+snakemake:
+  arg_name: --snakemake
+  arg_short_name: -smk
+  type: str
+  help: the arguments provided to snakemake
+  params:
+    cores:
+      arg_name: --cores
+      arg_short_name: -c
+      type: int
+      value: 6
+    use-conda:
+      arg_name: --use_conda
+      type: bool
+      value: False
+############################ snakemake END ############################
+
+#######################################################################
+## tools：rule 当中使用到的工具的参数                                  ##
+## - 补充说明: 涉及所有软件的常用参数                                     ##
+#######################################################################
+
+tools:
+  plink_qc:
+    arg_name: --plink_qc
+    params:
+      -geno: 0.1
+      -hwe: 1e-15
+      -mind: 0.1
+
+  bcftools_include:
+    arg_name: --bcftools_include
+    params: '(TYPE="snp" && N_PASS(GT="het" & FMT/AD[*:1]/(FMT/AD[*:0]+FMT/AD[*:1])>=0.15) >= 1) || (TYPE="snp" && COUNT(GT="AA") >= 1) || (TYPE="indel" && N_PASS(GT="het" & FMT/AD[*:1]/(FMT/AD[*:0]+FMT/AD[*:1])>=0.20) >= 1) || (TYPE="indel" && COUNT(GT="AA") >= 1)'
+
+  bcftools_exclude:
+    arg_name: --bcftools_exclude
+    params: 'TYPE="snp" & FORMAT/DP<7 | TYPE="indel" & FORMAT/DP<10'

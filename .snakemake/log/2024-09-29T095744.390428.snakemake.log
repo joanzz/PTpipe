@@ -1,0 +1,78 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 64
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+all               1
+final_cal         1
+total             5
+
+Select jobs to execute...
+
+[Sun Sep 29 09:57:44 2024]
+rule SamSel:
+    input: /gpfs/lijc/zhuzhp/PTpipe/data/Example/Example_sample_list.txt, data/02_qc2.vcf.gz
+    output: data/03_SamSel.vcf.gz
+    log: logs/SamSel.log
+    jobid: 4
+    reason: Set of input files has changed since last execution
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Sun Sep 29 09:57:45 2024]
+Finished job 4.
+1 of 5 steps (20%) done
+Select jobs to execute...
+
+[Sun Sep 29 09:57:45 2024]
+rule VCF_sorted:
+    input: data/03_SamSel.vcf.gz
+    output: data/04_sorted.vcf.gz
+    log: logs/VCF_sorted.log
+    jobid: 3
+    reason: Missing output files: data/04_sorted.vcf.gz; Input files updated by another job: data/03_SamSel.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Sun Sep 29 09:57:46 2024]
+Finished job 3.
+2 of 5 steps (40%) done
+Select jobs to execute...
+
+[Sun Sep 29 09:57:46 2024]
+rule MutSel:
+    input: data/04_sorted.vcf.gz, data/known_vaiants/SPARK_Denovo_chr_pos
+    output: data/04_MutSel.vcf.gz
+    log: logs/MutSel.log
+    jobid: 2
+    reason: Missing output files: data/04_MutSel.vcf.gz; Input files updated by another job: data/04_sorted.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Sun Sep 29 09:57:47 2024]
+Finished job 2.
+3 of 5 steps (60%) done
+Select jobs to execute...
+
+[Sun Sep 29 09:57:47 2024]
+rule final_cal:
+    input: data/04_MutSel.vcf.gz
+    output: /gpfs/lijc/zhuzhp/PTpipe/data/Test.txt
+    log: logs/final_cal.log
+    jobid: 1
+    reason: Missing output files: /gpfs/lijc/zhuzhp/PTpipe/data/Test.txt; Input files updated by another job: data/04_MutSel.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+RuleException in rule final_cal in file /gpfs/lijc/zhuzhp/PTpipe/workflow/rules/VCNum.smk, line 2:
+NameError: The name 'print "CHR\tPOS\tID\tREF\tALT"' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}, when formatting the following:
+
+        paste <(bcftools view {input} | awk -F"	" 'BEGIN {print "CHR	POS	ID	REF	ALT"} !/^#/ {print $1"	"$2"	"$3"	"$4"	"$5}') <(bcftools query -f '[	%SAMPLE=%GT]
+' {input} | awk 'BEGIN {print "nHet	Hom"} {het_count=gsub(/0\|1|1\|0|0\/1|1\/0/, ""); hom_count=gsub(/1\|1|1\/1/, ""); print het_count"	"hom_count}') > {output} 2> {log}
+        

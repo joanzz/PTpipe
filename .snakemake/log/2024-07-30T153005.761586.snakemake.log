@@ -1,0 +1,7 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+MissingInputException in rule SamSel in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/SamSel.smk, line 1:
+Missing input files for rule SamSel:
+    output: data/03_SamSel.vcf.gz
+    affected files:
+        /data/Example/Example_sample_list.txt

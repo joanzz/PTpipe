@@ -1,0 +1,42 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job          count
+---------  -------
+all              1
+final_cal        1
+total            2
+
+Select jobs to execute...
+
+[Tue Jul 23 10:53:26 2024]
+rule final_cal:
+    input: data/example_carriers.hwe, data/example_carriers.bim
+    output: result/cohort_carriers.txt
+    log: logs/final_cal.log
+    jobid: 1
+    reason: Missing output files: result/cohort_carriers.txt
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 10:53:26 2024]
+Error in rule final_cal:
+    jobid: 1
+    input: data/example_carriers.hwe, data/example_carriers.bim
+    output: result/cohort_carriers.txt
+    log: logs/final_cal.log (check log file(s) for error details)
+
+RuleException:
+WorkflowError in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/VCNum.smk, line 22:
+Failed to open source file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/
+        # module load r  
+        Rscript scripts/merge.R
+        
+FileNotFoundError: [Errno 2] No such file or directory: '/gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/\n        # module load r  \n        Rscript scripts/merge.R\n        '
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/VCNum.smk", line 22, in __rule_final_cal
+  File "/gpfs/hpc/home/lijc/zhuzp/miniconda3/envs/PTseeker/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-23T105326.454018.snakemake.log

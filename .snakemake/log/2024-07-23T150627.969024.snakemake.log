@@ -1,0 +1,39 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job          count
+---------  -------
+all              1
+final_cal        1
+total            2
+
+Select jobs to execute...
+
+[Tue Jul 23 15:06:28 2024]
+rule final_cal:
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.hwe, /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.bim
+    output: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    log: logs/final_cal.log
+    jobid: 1
+    reason: Missing output files: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 15:06:29 2024]
+Error in rule final_cal:
+    jobid: 1
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.hwe, /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.bim
+    output: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    log: logs/final_cal.log (check log file(s) for error details)
+    shell:
+        
+        # module load r  
+        Rscript workflow/scripts/merge.R &> logs/final_cal.log
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-23T150627.969024.snakemake.log

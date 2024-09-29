@@ -1,0 +1,7 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+MissingInputException in rule variantQC in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/baseQC.smk, line 1:
+Missing input files for rule variantQC:
+    output: data/01_qc1.vcf.gz
+    affected files:
+        /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/Test1/02_qc2.vcf.gz

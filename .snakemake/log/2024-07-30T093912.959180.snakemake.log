@@ -1,0 +1,6 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+WorkflowError:
+Unable to obtain modification time of file /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/Test1/02_qc2.vcf.gz although it existed before. It could be that a concurrent process has deleted it while Snakemake was running.
+  File "/gpfs/hpc/home/lijc/zhuzp/miniconda3/envs/PTseeker/lib/python3.9/asyncio/runners.py", line 44, in run
+  File "/gpfs/hpc/home/lijc/zhuzp/miniconda3/envs/PTseeker/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete

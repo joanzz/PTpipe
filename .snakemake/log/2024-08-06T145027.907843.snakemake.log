@@ -1,0 +1,7 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Relative file path './data/result/aaa.txt' starts with './'. This is redundant and strongly discouraged. It can also lead to inconsistent results of the file-matching approach used by Snakemake. You can simply omit the './' for relative file paths.
+Relative file path './data/result/aaa.txt' starts with './'. This is redundant and strongly discouraged. It can also lead to inconsistent results of the file-matching approach used by Snakemake. You can simply omit the './' for relative file paths.
+Relative file path './data/Test/02_qc2.vcf.gz' starts with './'. This is redundant and strongly discouraged. It can also lead to inconsistent results of the file-matching approach used by Snakemake. You can simply omit the './' for relative file paths.
+Nothing to be done (all requested files are present and up to date).
+Complete log: .snakemake/log/2024-08-06T145027.907843.snakemake.log

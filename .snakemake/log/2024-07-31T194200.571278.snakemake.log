@@ -1,0 +1,104 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 6
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+total             6
+
+Select jobs to execute...
+
+[Wed Jul 31 19:42:01 2024]
+rule SamSel:
+    input: /gpfs/lijc/zhuzhp/PTseeker/data/Example/Example_sample_list.txt, data/02_qc2.vcf.gz
+    output: data/03_SamSel.vcf.gz
+    log: logs/SamSel.log
+    jobid: 5
+    reason: Missing output files: data/03_SamSel.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Wed Jul 31 19:42:03 2024]
+Finished job 5.
+1 of 6 steps (17%) done
+Select jobs to execute...
+
+[Wed Jul 31 19:42:03 2024]
+rule VCF_sorted:
+    input: data/03_SamSel.vcf.gz
+    output: data/04_sorted.vcf.gz
+    log: logs/VCF_sorted.log
+    jobid: 4
+    reason: Missing output files: data/04_sorted.vcf.gz; Input files updated by another job: data/03_SamSel.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Wed Jul 31 19:42:04 2024]
+Finished job 4.
+2 of 6 steps (33%) done
+Select jobs to execute...
+
+[Wed Jul 31 19:42:04 2024]
+rule MutSel:
+    input: data/04_sorted.vcf.gz, data/known_vaiants/SPARK_Denovo_chr_pos
+    output: data/04_MutSel.vcf.gz
+    log: logs/MutSel.log
+    jobid: 3
+    reason: Missing output files: data/04_MutSel.vcf.gz; Input files updated by another job: data/04_sorted.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Wed Jul 31 19:42:04 2024]
+Finished job 3.
+3 of 6 steps (50%) done
+Select jobs to execute...
+
+[Wed Jul 31 19:42:04 2024]
+rule VCNum:
+    input: data/04_MutSel.vcf.gz
+    output: data/05_carriers.bed, data/05_carriers.bim, data/05_carriers.hwe, data/05_carriers.fam, data/05_carriers.log, data/05_carriers.nosex
+    log: logs/VCNum.log
+    jobid: 2
+    reason: Missing output files: data/05_carriers.hwe, data/05_carriers.bim; Input files updated by another job: data/04_MutSel.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Wed Jul 31 19:42:05 2024]
+Finished job 2.
+4 of 6 steps (67%) done
+Select jobs to execute...
+
+[Wed Jul 31 19:42:05 2024]
+rule final_cal:
+    input: data/05_carriers.hwe, data/05_carriers.bim
+    output: /gpfs/lijc/zhuzhp/PTseeker/data/result/aaa.txt
+    log: logs/final_cal.log
+    jobid: 1
+    reason: Missing output files: /gpfs/lijc/zhuzhp/PTseeker/data/result/aaa.txt; Input files updated by another job: data/05_carriers.hwe, data/05_carriers.bim
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Wed Jul 31 19:42:05 2024]
+Finished job 1.
+5 of 6 steps (83%) done
+Select jobs to execute...
+
+[Wed Jul 31 19:42:05 2024]
+localrule all:
+    input: /gpfs/lijc/zhuzhp/PTseeker/data/result/aaa.txt
+    jobid: 0
+    reason: Input files updated by another job: /gpfs/lijc/zhuzhp/PTseeker/data/result/aaa.txt
+    resources: tmpdir=/tmp
+
+[Wed Jul 31 19:42:05 2024]
+Finished job 0.
+6 of 6 steps (100%) done
+Complete log: .snakemake/log/2024-07-31T194200.571278.snakemake.log

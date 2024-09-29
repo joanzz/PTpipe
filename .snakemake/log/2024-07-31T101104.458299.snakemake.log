@@ -1,0 +1,6 @@
+Config file config/config1.yaml is extended by additional config specified via the command line.
+AttributeError in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/Snakefile, line 41:
+'str' object has no attribute 'items'
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/Snakefile", line 67, in <module>
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/baseQC.smk", line 24, in <module>
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/Snakefile", line 41, in tools_param_parse

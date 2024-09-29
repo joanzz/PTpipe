@@ -1,0 +1,29 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+sampleQC          1
+variantQC         1
+total             8
+
+Select jobs to execute...
+
+[Sat Jul 27 10:23:56 2024]
+rule variantQC:
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/Example/Example.vcf.gz, data/reference/hg38.fa
+    output: data/01_qc1.vcf.gz
+    log: logs/variantQC.log
+    jobid: 7
+    reason: Missing output files: data/01_qc1.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+

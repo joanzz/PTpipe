@@ -1,0 +1,5 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+FileExistsError in file /gpfs/lijc/zhuzhp/PTpipe/Snakefile, line 48:
+[Errno 17] File exists: '/gpfs/lijc/zhuzhp/PTpipe/data/Test/02_qc2.vcf.gz' -> 'data/01_qc1.vcf.gz'
+  File "/gpfs/lijc/zhuzhp/PTpipe/Snakefile", line 66, in <module>
+  File "/gpfs/lijc/zhuzhp/PTpipe/Snakefile", line 48, in create_symlink

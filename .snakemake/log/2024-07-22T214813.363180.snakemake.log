@@ -1,0 +1,51 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+sampleQC          1
+variantQC         1
+total             8
+
+Select jobs to execute...
+
+[Mon Jul 22 21:48:13 2024]
+rule variantQC:
+    input: data/ex_sample.vcf.gz, data/hg38.fa
+    output: data/example.vcf_qc1.gz
+    log: logs/variantQC.log
+    jobid: 7
+    reason: Missing output files: data/example.vcf_qc1.gz
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Mon Jul 22 23:46:54 2024]
+Finished job 7.
+1 of 8 steps (12%) done
+Select jobs to execute...
+
+[Mon Jul 22 23:46:54 2024]
+rule sampleQC:
+    input: data/example.vcf_qc1.gz
+    output: data/example.vcf_qc2.vcf
+    log: logs/sampleQC.log
+    jobid: 6
+    reason: Missing output files: data/example.vcf_qc2.vcf; Input files updated by another job: data/example.vcf_qc1.gz
+    threads: 8
+    resources: tmpdir=/tmp
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule sampleQC in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/baseQC.smk, line 16:
+Job 6  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+data/example.vcf_qc2.vcf
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-22T214813.363180.snakemake.log

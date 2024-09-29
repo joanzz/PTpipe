@@ -1,0 +1,4 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+TypeError in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/Snakefile, line 41:
+copy_or_symlink() got an unexpected keyword argument 'copy'
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/Snakefile", line 41, in <module>

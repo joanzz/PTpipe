@@ -1,0 +1,60 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+sampleQC          1
+variantQC         1
+total             8
+
+Select jobs to execute...
+
+[Sat Jul 27 10:37:07 2024]
+rule variantQC:
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/Example/Example.vcf.gz, data/reference/hg38.fa
+    output: data/01_qc1.vcf.gz
+    log: logs/variantQC.log
+    jobid: 7
+    reason: Missing output files: data/01_qc1.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Sat Jul 27 12:29:49 2024]
+Finished job 7.
+1 of 8 steps (12%) done
+Select jobs to execute...
+
+[Sat Jul 27 12:29:49 2024]
+rule sampleQC:
+    input: data/01_qc1.vcf.gz
+    output: data/02_qc2.irem, data/02_qc2.log, data/02_qc2.nosex, data/02_qc2.vcf.gz
+    log: logs/sampleQC.log
+    jobid: 6
+    reason: Missing output files: data/02_qc2.vcf.gz; Input files updated by another job: data/01_qc1.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Sat Jul 27 12:29:49 2024]
+Error in rule sampleQC:
+    jobid: 6
+    input: data/01_qc1.vcf.gz
+    output: data/02_qc2.irem, data/02_qc2.log, data/02_qc2.nosex, data/02_qc2.vcf.gz
+    log: logs/sampleQC.log (check log file(s) for error details)
+    shell:
+        
+        plink --vcf data/01_qc1.vcf.gz --allow-extra-chr 0 --vcf-half-call m --geno 0.1 --hwe 1e-15 --mind 0.1 --recode vcf --out data/02_qc2.irem data/02_qc2.log data/02_qc2.nosex data/02_qc2.vcf.gz 2> logs/sampleQC.log
+        bgzip data/02_qc2.vcf 2>> logs/sampleQC.log
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-27T103707.098778.snakemake.log

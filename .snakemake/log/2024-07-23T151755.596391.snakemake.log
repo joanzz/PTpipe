@@ -1,0 +1,39 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job          count
+---------  -------
+all              1
+final_cal        1
+total            2
+
+Select jobs to execute...
+
+[Tue Jul 23 15:17:55 2024]
+rule final_cal:
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.hwe, /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/example_carriers.bim
+    output: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    log: logs/final_cal.log
+    jobid: 1
+    reason: Missing output files: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 15:17:56 2024]
+Finished job 1.
+1 of 2 steps (50%) done
+Select jobs to execute...
+
+[Tue Jul 23 15:17:56 2024]
+localrule all:
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    jobid: 0
+    reason: Input files updated by another job: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/result/cohort_carriers.txt
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 15:17:56 2024]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: .snakemake/log/2024-07-23T151755.596391.snakemake.log

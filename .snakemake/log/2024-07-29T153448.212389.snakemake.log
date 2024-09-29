@@ -1,0 +1,100 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+sampleQC          1
+total             7
+
+Select jobs to execute...
+
+[Mon Jul 29 15:34:48 2024]
+rule sampleQC:
+    input: data/01_qc1.vcf.gz
+    output: data/02_qc2.irem, data/02_qc2.log, data/02_qc2.nosex, data/02_qc2.vcf, data/02_qc2.vcf.gz
+    log: logs/sampleQC.log
+    jobid: 6
+    reason: Missing output files: data/02_qc2.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Mon Jul 29 15:42:26 2024]
+Finished job 6.
+1 of 7 steps (14%) done
+Select jobs to execute...
+
+[Mon Jul 29 15:42:26 2024]
+rule SamSel:
+    input: /gpfs/hpc/home/lijc/zhuzp/PTseeker/data/Example/Example_sample_list.txt, data/02_qc2.vcf.gz
+    output: data/03_SamSel.vcf.gz
+    log: logs/SamSel.log
+    jobid: 5
+    reason: Missing output files: data/03_SamSel.vcf.gz; Input files updated by another job: data/02_qc2.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Mon Jul 29 15:42:27 2024]
+Finished job 5.
+2 of 7 steps (29%) done
+Select jobs to execute...
+
+[Mon Jul 29 15:42:27 2024]
+rule VCF_sorted:
+    input: data/03_SamSel.vcf.gz
+    output: data/04_sorted.vcf.gz
+    log: logs/VCF_sorted.log
+    jobid: 4
+    reason: Missing output files: data/04_sorted.vcf.gz; Input files updated by another job: data/03_SamSel.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Mon Jul 29 15:42:28 2024]
+Finished job 4.
+3 of 7 steps (43%) done
+Select jobs to execute...
+
+[Mon Jul 29 15:42:28 2024]
+rule MutSel:
+    input: data/04_sorted.vcf.gz, data/known_vaiants/SPARK_Denovo_chr_pos
+    output: data/04_MutSel.vcf.gz
+    log: logs/MutSel.log
+    jobid: 3
+    reason: Missing output files: data/04_MutSel.vcf.gz; Input files updated by another job: data/04_sorted.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Mon Jul 29 15:42:29 2024]
+Finished job 3.
+4 of 7 steps (57%) done
+Select jobs to execute...
+
+[Mon Jul 29 15:42:29 2024]
+rule VCNum:
+    input: data/04_MutSel.vcf.gz
+    output: data/05_carriers.bed, data/05_carriers.bim, data/05_carriers.hwe, data/05_carriers.fam, data/05_carriers.log, data/05_carriers.nosex
+    log: logs/VCNum.log
+    jobid: 2
+    reason: Missing output files: data/05_carriers.hwe, data/05_carriers.bim; Input files updated by another job: data/04_MutSel.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule VCNum in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/VCNum.smk, line 1:
+Job 2  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+data/05_carriers.bed
+data/05_carriers.bim
+data/05_carriers.hwe
+data/05_carriers.fam
+data/05_carriers.log
+data/05_carriers.nosex
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-29T153448.212389.snakemake.log

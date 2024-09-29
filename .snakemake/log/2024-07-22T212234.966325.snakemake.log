@@ -1,0 +1,30 @@
+Building DAG of jobs...
+Relative file path './data/hg38.fa' starts with './'. This is redundant and strongly discouraged. It can also lead to inconsistent results of the file-matching approach used by Snakemake. You can simply omit the './' for relative file paths.
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+sampleQC          1
+variantQC         1
+total             8
+
+Select jobs to execute...
+
+[Mon Jul 22 21:22:36 2024]
+rule variantQC:
+    input: data/ex_sample.vcf.gz, ./data/hg38.fa
+    output: data/example.vcf_qc1.gz
+    log: logs/variantQC.log
+    jobid: 7
+    reason: Missing output files: data/example.vcf_qc1.gz
+    threads: 8
+    resources: tmpdir=/tmp
+

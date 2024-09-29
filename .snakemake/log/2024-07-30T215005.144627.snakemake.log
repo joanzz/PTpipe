@@ -1,0 +1,38 @@
+Config file config/config1.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 64
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+sampleQC          1
+total             7
+
+Select jobs to execute...
+
+[Tue Jul 30 21:50:06 2024]
+rule sampleQC:
+    input: data/01_qc1.vcf.gz
+    output: data/02_qc2.irem, data/02_qc2.log, data/02_qc2.nosex, data/02_qc2.vcf, data/02_qc2.vcf.gz
+    log: logs/sampleQC.log
+    jobid: 6
+    reason: Code has changed since last execution; Params have changed since last execution
+    threads: 6
+    resources: tmpdir=/tmp
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule sampleQC in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/baseQC.smk, line 15:
+Job 6  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+data/02_qc2.irem
+Removing output files of failed job sampleQC since they might be corrupted:
+data/02_qc2.log, data/02_qc2.nosex, data/02_qc2.vcf, data/02_qc2.vcf.gz
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-30T215005.144627.snakemake.log

@@ -1,0 +1,29 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 64
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+sampleQC          1
+total             7
+
+Select jobs to execute...
+
+[Mon Jul 29 16:34:49 2024]
+rule sampleQC:
+    input: data/01_qc1.vcf.gz
+    output: data/02_qc2.irem, data/02_qc2.log, data/02_qc2.nosex, data/02_qc2.vcf, data/02_qc2.vcf.gz
+    log: logs/sampleQC.log
+    jobid: 6
+    reason: Missing output files: data/02_qc2.vcf.gz
+    threads: 6
+    resources: tmpdir=/tmp
+

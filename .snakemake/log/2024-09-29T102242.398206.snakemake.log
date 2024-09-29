@@ -1,0 +1,41 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 64
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+SamSel            1
+VCF_sorted        1
+all               1
+final_cal         1
+total             4
+
+Select jobs to execute...
+
+[Sun Sep 29 10:22:42 2024]
+rule SamSel:
+    input: /gpfs/lijc/zhuzhp/PTpipe/data/known_vaiants/Example_chr_pos, data/02_qc2.vcf.gz
+    output: data/03_SamSel.vcf.gz
+    log: logs/SamSel.log
+    jobid: 3
+    reason: Set of input files has changed since last execution
+    threads: 6
+    resources: tmpdir=/tmp
+
+[Sun Sep 29 10:22:42 2024]
+Error in rule SamSel:
+    jobid: 3
+    input: /gpfs/lijc/zhuzhp/PTpipe/data/known_vaiants/Example_chr_pos, data/02_qc2.vcf.gz
+    output: data/03_SamSel.vcf.gz
+    log: logs/SamSel.log (check log file(s) for error details)
+    shell:
+        
+        bcftools view -S /gpfs/lijc/zhuzhp/PTpipe/data/known_vaiants/Example_chr_pos data/02_qc2.vcf.gz -Oz --threads 6 -o data/03_SamSel.vcf.gz 2> logs/SamSel.log
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-09-29T102242.398206.snakemake.log

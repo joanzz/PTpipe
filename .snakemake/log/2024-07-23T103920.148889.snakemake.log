@@ -1,0 +1,101 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 8
+Rules claiming more threads will be scaled down.
+Job stats:
+job           count
+----------  -------
+MutSel            1
+SamSel            1
+VCF_sorted        1
+VCNum             1
+all               1
+final_cal         1
+total             6
+
+Select jobs to execute...
+
+[Tue Jul 23 10:39:21 2024]
+rule SamSel:
+    input: data/ex_samples.txt, data/example.vcf_qc2.vcf
+    output: data/example.vcf_SamSel.gz
+    log: logs/SamSel.log
+    jobid: 5
+    reason: Missing output files: data/example.vcf_SamSel.gz
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 10:39:22 2024]
+Finished job 5.
+1 of 6 steps (17%) done
+Select jobs to execute...
+
+[Tue Jul 23 10:39:22 2024]
+rule VCF_sorted:
+    input: data/example.vcf_SamSel.gz
+    output: data/example_sorted.vcf.gz
+    log: logs/VCF_sorted.log
+    jobid: 4
+    reason: Missing output files: data/example_sorted.vcf.gz; Input files updated by another job: data/example.vcf_SamSel.gz
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 10:39:23 2024]
+Finished job 4.
+2 of 6 steps (33%) done
+Select jobs to execute...
+
+[Tue Jul 23 10:39:23 2024]
+rule MutSel:
+    input: data/example_sorted.vcf.gz, data/SPARK_Denovo_chr_pos
+    output: data/example_MutSel.vcf.gz
+    log: logs/MutSel.log
+    jobid: 3
+    reason: Missing output files: data/example_MutSel.vcf.gz; Input files updated by another job: data/example_sorted.vcf.gz
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 10:39:24 2024]
+Finished job 3.
+3 of 6 steps (50%) done
+Select jobs to execute...
+
+[Tue Jul 23 10:39:24 2024]
+rule VCNum:
+    input: data/example_MutSel.vcf.gz
+    output: data/example_carriers.bed, data/example_carriers.bim, data/example_carriers.hwe, data/example_carriers.fam, data/example_carriers.log, data/example_carriers.nosex
+    log: logs/VCNum.log
+    jobid: 2
+    reason: Missing output files: data/example_carriers.hwe, data/example_carriers.bim; Input files updated by another job: data/example_MutSel.vcf.gz
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 10:39:24 2024]
+Finished job 2.
+4 of 6 steps (67%) done
+Select jobs to execute...
+
+[Tue Jul 23 10:39:24 2024]
+rule final_cal:
+    input: data/example_carriers.hwe, data/example_carriers.bim
+    output: result/cohort_carriers.txt
+    log: logs/final_cal.log
+    jobid: 1
+    reason: Missing output files: result/cohort_carriers.txt; Input files updated by another job: data/example_carriers.hwe, data/example_carriers.bim
+    threads: 8
+    resources: tmpdir=/tmp
+
+[Tue Jul 23 10:39:24 2024]
+Error in rule final_cal:
+    jobid: 1
+    input: data/example_carriers.hwe, data/example_carriers.bim
+    output: result/cohort_carriers.txt
+    log: logs/final_cal.log (check log file(s) for error details)
+
+RuleException:
+NameError in file /gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/VCNum.smk, line 22:
+The name 'log' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/VCNum.smk", line 22, in __rule_final_cal
+  File "/gpfs/hpc/home/lijc/zhuzp/miniconda3/envs/PTseeker/lib/python3.9/concurrent/futures/thread.py", line 58, in run
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2024-07-23T103920.148889.snakemake.log

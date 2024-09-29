@@ -1,0 +1,5 @@
+Config file config/config.yaml is extended by additional config specified via the command line.
+SyntaxError:
+Input and output files have to be specified as strings or lists of strings.
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/Snakefile", line 47, in <module>
+  File "/gpfs/hpc/home/lijc/zhuzp/PTseeker/workflow/rules/SamSel.smk", line 11, in <module>
