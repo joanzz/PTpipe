@@ -3,7 +3,7 @@
 [![Conda](https://img.shields.io/badge/conda-≥24.5.0-brightgreen.svg?style=flat-square)](https://anaconda.org/conda-forge/mamba)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 
-PenetranceCards, a global, community-contributed public archive of variant penetrance. PTpipe is an offline script used to update penetrance in PenetranceCards. Previous studies have shown that the accuracy of penetrance is highly dependent on the sample size.([McGurk, Kathryn A et al.](https://pubmed.ncbi.nlm.nih.gov/37652022/)). We encourage researchers worldwide to share their data, process it using PTpipe, and upload it to PenetranceCards, helping to enhance the accuracy of penetrance estimates within the platform.
+PenetranceCards, a global, community-contributed public archive of variant penetrance. PTpipe is an offline script used to update penetrance in PenetranceCards. Previous studies have shown that the accuracy of penetrance is highly dependent on the sample size([McGurk, Kathryn A et al.](https://pubmed.ncbi.nlm.nih.gov/37652022/)). We encourage researchers worldwide to share their data, process it using PTpipe, and upload it to PenetranceCards, helping to enhance the accuracy of penetrance estimates within the platform.
 
 
 <div align="center">
